@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>VendingWeb</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 15px;
+            margin: 0;
+            padding: 0;
+            height: 90vh;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(-45deg, #2980b9, #6dd5fa, #fff, #4286f4);
+            background-size: 400% 400%;
+            animation: gradient 10s ease infinite;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bf9;
+            color: #fff;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        p.message {
+            margin-top: 20px;
+            color: green;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Bienvenido al panel de gestión de tareas</h1>
+
+
+        <h2>Users</h2>
+        <form action="/usuario" method="POST">
+            <button type="submit">Usuario</button>
+        </form>
+
+    </div>
+</body>
+
+</html>

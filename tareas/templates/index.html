@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>VendingWeb</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 15px;
+            margin: 0;
+            padding: 0;
+            height: 90vh;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(-45deg, #d12ae0, #6dfaac, #fff, #8926a1);
+            background-size: 400% 400%;
+            animation: gradient 10s ease infinite;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        button[type="submit"] {
+            width: 100px;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            margin-left: 30px;
+
+        }
+
+        p.message {
+            margin-top: 20px;
+            color: green;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Bienvenido a su sistema de Ventas</h1>
+
+        <h2>Registro</h2>
+        {% if message %}
+        <p class="message">{{ message }}</p>
+        {% endif %}
+        <form action="/registrarse" method="post">
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+
+
+            <button type="submit">Registrarse como usuario</button>
+        </form>
+
+        <h2>Iniciar sesión</h2>
+        <form action="/loginUser" method="post">
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+
+    </div>
+</body>
+
+</html>
