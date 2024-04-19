@@ -1,14 +1,14 @@
 from flask import Flask, render_template, redirect, url_for, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-import datetime
+from flask_jwt_extended import create_access_token, jwt_required,JWTManager
 import webbrowser
-import jwt
-import pyodbc
+#import pyobdc
 
 
 app = Flask(__name__)
-#app.config['SECRET_KEY'] = 'tu_clave_secreta_aqui'
+app.config['SECRET_KEY'] = 'bv42df560ml32'
+jwt = JWTManager(app)
  
 # Lista en memoria para almacenar los usuarios registrados (simulación de base de datos)
 # Hacerlo por conexión a bases de datos
@@ -57,13 +57,11 @@ def registrarse():
         return render_template('error.html', message=str(e))
 
 @app.route('/loginUser', methods=['POST'])
-# IMPLEMENTAR EL JWT
-
-
 def loginUser():
     try:
         username = request.form.get('username')
-        password = request.form.get('password')      
+        password = request.form.get('password') 
+        token(username,password)
         
         # Verificar si el usuario está registrado
         if username in usuarios:
@@ -81,6 +79,12 @@ def loginUser():
             return render_template('index.html', message='Usuario no registrado')
     except Exception as e:
         return render_template('error.html', message=str(e))
+
+#The token is here
+def token(name,password):
+    additional = {"name": name, "password": password}
+    access_token = create_access_token(identity = "username",additional_claims=additional)
+    return access_token
 
 @app.route('/menu')
 def menu():
