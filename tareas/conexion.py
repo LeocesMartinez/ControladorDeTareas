@@ -52,4 +52,11 @@ class Conexion:
         conn.close()
         return last_id
     
-
+    def ejecutar_actualizar(self, consulta, parametros):
+        conn = self.__conectar()
+        cursor = conn.cursor()
+        cursor.execute(consulta, parametros)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        

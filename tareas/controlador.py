@@ -4,7 +4,7 @@ from flask_cors import CORS
 
 #from manejadorTareas import crearTarea
 from serivicios.manejadorUsuario import ManejadorUsuario, ERROR_CONSULTAR_USUARIO, ERROR_REGISTRAR_USUARIO, ERROR_LOGIN_USUARIO
-from serivicios.manejadorTareas import ManejadorTarea, ERROR_CREAR_TAREA
+from serivicios.manejadorTareas import ManejadorTarea, ERROR_CREAR_TAREA, ERROR_MOSTRAR_TAREA
 import datetime
 #from conexion import Conexion
 #Conexion.conectar()
@@ -50,7 +50,7 @@ def login_usuario():
         abort(500, ERROR_CONSULTAR_USUARIO + str(e))         
 
   
-@app.route('/crearTareas', methods=["POST"])
+@app.route('/crear-tareas', methods=["POST"])
 def crear_tarea():
     try:
         titulo = request.form.get('titulo')
@@ -58,13 +58,40 @@ def crear_tarea():
         fechaVencimiento = request.form.get('fechaVencimiento')
         prioridad = request.form.get('prioridad')    
         usuario_creador = request.form.get('creadorTarea')
+        usuario_asignado = request.form.get('usuario_asignado')
 
         manejadorTareas = ManejadorTarea()
-        return manejadorTareas.crearTarea(titulo, descripcion,fechaVencimiento,prioridad,usuario_creador)    
+        return manejadorTareas.crearTarea(titulo, descripcion, fechaVencimiento, prioridad, usuario_creador, usuario_asignado)    
     except Exception as e:
         traceback.print_exc()
         abort(500, ERROR_CREAR_TAREA + str(e))
-
+        
+@app.route('/mostrar-tareas', methods=["GET"])
+def mostrar_tarea():
+    try:
+        usuario_asignado = request.args.get('usuarioAsignado')
+        estado = request.args.get('estado')
+        print('parametros', usuario_asignado, estado)
+        manejadorTareas = ManejadorTarea()
+        return manejadorTareas.mostrarTarea(usuario_asignado, estado)
+        
+    except Exception as e:
+        traceback.print_exc()
+        abort(500, ERROR_MOSTRAR_TAREA + str(e))
+        
+@app.route('/reasignar-tarea', methods=["PUT"])
+def reasignar_tarea():
+    try:
+        tareaId = request.form.get('tareaId')
+        usuarioAsignador = request.form.get('usuarioAsignador')
+        usuarioAsignado = request.form.get('usuarioAsignado')
+        
+        manejadorTareas = ManejadorTarea()
+        return manejadorTareas.reasignarTarea(tareaId, usuarioAsignador, usuarioAsignado)
+        
+    except Exception as e:
+        traceback.print_exc()
+        abort(500, ERROR_MOSTRAR_TAREA + str(e))
 #@app.route('/marcarTareaCompletada', methods=["PUT"])
 #def marcar_tarea_completada():
 
