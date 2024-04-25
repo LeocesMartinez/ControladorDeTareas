@@ -60,3 +60,10 @@ class Conexion:
         cursor.close()
         conn.close()
         
+    def ejecutar_eliminar(self, consulta, parametros):
+        conn = self.__conectar()
+        cursor = conn.cursor()
+        cursor.execute(consulta, parametros)
+        conn.commit()
+        cursor.close()
+        conn.close()
