@@ -1,0 +1,113 @@
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #e7f3ff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    color: #333;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar {
+    flex-basis: 250px;
+    background-color: #95baff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.sidebar-header h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.task-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.content {
+    flex-grow: 1;
+    background-color: #e1dfff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.task-form, .search-form, .task-actions {
+    margin-bottom: 20px;
+}
+
+.task-form input[type="text"], .search-form input[type="text"] {
+    width: calc(100% - 90px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+.search-form button, .task-form button, .task-actions button {
+    padding: 10px 20px;
+    border-radius: 0 5px 5px 0;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.task-form button:hover, .search-form button:hover, .task-actions button:hover {
+    background-color: #0056b3;
+}
+
+.task-list li {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.task-list li:last-child {
+    margin-bottom: 0;
+}
+
+.assign-form {
+    margin-bottom: 20px;
+}
+
+.assign-form input[type="text"] {
+    width: calc(100% - 110px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+.assign-form button {
+    padding: 10px 20px;
+    border-radius: 0 5px 5px 0;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.assign-form button:hover {
+    background-color: #0056b3;
+}
