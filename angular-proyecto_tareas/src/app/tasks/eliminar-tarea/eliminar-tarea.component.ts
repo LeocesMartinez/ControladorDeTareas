@@ -1,24 +1,24 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ApiService } from '../../api/api.service';
-import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  selector: 'app-eliminar-tarea',
+  templateUrl: './eliminar-tarea.component.html',
+  styleUrls: ['./eliminar-tarea.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class EliminarTareaComponent implements OnInit, OnDestroy {
   mensajeError = "";
   private suscripcionServicio?: Subscription;
 
   constructor(private apiService: ApiService, private router: Router) { }
   
   ngOnInit(): void {
-    console.log('Iniciando componente de Login')
     const usuarioLogueado = localStorage.getItem('usuario');
-    if(usuarioLogueado) {
-      this.router.navigate(['/tareas']);
+    console.log('Iniciando componente de EliminarTarea', usuarioLogueado);
+    if(!usuarioLogueado) {
+      this.router.navigate(['/usuario']);
     } 
   }
   
@@ -31,33 +31,31 @@ export class LoginComponent implements OnInit, OnDestroy {
   submitForm(form: any) {
     this.mensajeError = "";
     console.log('enviando')
-    if (form.valid) {    
+    if (form.valid) {
 
-      const login = {
-        username: form.value.usuario, 
-        password: form.value.password
-      };
-      //Invocar el servicio
-      console.log('Objeto para invocar el servicio', login)
+      // Obtener ID de la tarea a eliminar
+      const tareaId = form.value.tareaId;
+      
+      //Invocar el servicio para eliminar la tarea por su ID
+      console.log('ID de tarea a eliminar:', tareaId);
 
       if (this.suscripcionServicio) {
         this.suscripcionServicio.unsubscribe();
       }
 
-      this.suscripcionServicio = this.apiService.create('login-usuario', login)
+      this.suscripcionServicio = this.apiService.delete(`eliminar-tareas/${tareaId}`, null)
       .subscribe({
         next: (datos) => {
           // Manejar datos exitosos aquí
           this.mensajeError = "";
           console.log('Datos exitosos:', datos);
-          localStorage.setItem('usuario', login.username);
           this.router.navigate(['/tareas']);
 
         },
         error: (error) => {
           // Manejar errores aquí
-          this.mensajeError = "Ha ocurrido un error en el login del usuario: usuario y/o constraseña incorrecta.";
-          console.error('Error al obtener datos:', error);
+          this.mensajeError = "Ha ocurrido un error al eliminar la tarea";
+          console.error('Error al eliminar la tarea:', error);
         },
         complete: () => {
           // Manejar la finalización aquí si es necesario
@@ -65,7 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       });
 
     } else {
-      this.mensajeError = "Debe llenar todos los campos del formulario";
+      this.mensajeError = "Debe proporcionar el ID de la tarea a eliminar";
       console.log('El formulario no es válido');
     }
   }

@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="header">
+        <h1>TaskTrack</h1>
+    </div>
+    <div class="main-content">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Tareas</h2>
+            </div>
+            <ul class="task-list" id="task-list">
+                <!-- Las tareas se agregarán dinámicamente aquí -->
+            </ul>
+        </div>
+
+
+
+        <div class="content">
+            <div class="task-form">
+                <!-- <input type="text" id="task-input" placeholder="Agregar nueva tarea..."> -->
+                <button id="add-task-btn" routerLink="crear" class="btn">Agregar Tarea</button>
+            </div>
+            <div class="search-form">
+                <!-- <input type="text" id="search-input" placeholder="Buscar tarea..."> -->
+                <button id="search-task-btn" routerLink="ver" class="btn">Ver tareas</button>
+            </div>
+            <div class="assign-form">
+                <input type="text" id="assign-input" placeholder="Asignar tarea...">
+                <button id="assign-task-btn" class="btn">Asignar</button>
+            </div>
+            <div class="task-actions">
+                <button id="delete-task-btn" class="btn">Eliminar Tarea</button>
+            </div>
+            <div class="task-actions">
+                <button id="update-task-btn" class="btn">Actualizar Tarea</button>
+            </div>
+            <div class="task-actions">
+                <a (click)="cerrarSesion()" class="btn">Cerrar Sesión</a>
+            </div>
+        </div>
+    </div>
+</div>

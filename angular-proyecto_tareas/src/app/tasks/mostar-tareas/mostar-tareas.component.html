@@ -1,0 +1,35 @@
+<select [(ngModel)]="estado">
+    <option value="PENDIENTE">PENDIENTE</option>
+    <option value="COMPLETADA">COMPLETADA</option>
+</select>
+
+<button (click)="verTareas()" class="btn">Actualizar</button>
+
+<hr>
+
+<table>
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Fecha de Creación</th>
+            <th>Fecha de Vencimiento</th>
+            <th>Prioridad</th>
+            <th>Usuario Asignado</th>
+            <th>Usuario Creador</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tarea of tareas">
+            <td>{{ tarea.titulo }}</td>
+            <td>{{ tarea.descripcion }}</td>
+            <td>{{ tarea.estado }}</td>
+            <td>{{ tarea.fecha_creacion }}</td>
+            <td>{{ tarea.fecha_vencimiento }}</td>
+            <td>{{ tarea.prioridad }}</td>
+            <td>{{ tarea.usuario_asignado }}</td>
+            <td>{{ tarea.usuario_creador }}</td>
+        </tr>
+    </tbody>
+</table>

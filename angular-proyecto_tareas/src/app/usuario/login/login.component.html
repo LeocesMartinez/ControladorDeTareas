@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html lang="es">
-<body>
-    <div class="container">
-        <h1>Iniciar Sesión</h1>
-        <form action="#" method="POST" class="login-form">
-            <div class="form-group">
-                <label for="username">Usuario:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
-            </div >
-            <a href="/tareas" class="btn"> Iniciar</a>
-               
-        </form>
+<div class="container">
+    <h1>Iniciar Sesión</h1>
+    <div *ngIf="mensajeError" class="error-message">
+        {{ mensajeError }}
     </div>
-</body>
-</html>
+    <form #form="ngForm" (ngSubmit)="submitForm(form)">
+        <div class="form-group">
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" name="usuario" ngModel required>
+        </div>
 
+        <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" ngModel required>
+        </div>
+        <!--<a href="/tareas" class="btn"> Iniciar</a>-->
+        <button type="submit" class="btn">Iniciar sesion</button>
+    </form>
+</div>
