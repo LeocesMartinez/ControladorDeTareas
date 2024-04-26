@@ -18,6 +18,7 @@
             <th>Prioridad</th>
             <th>Usuario Asignado</th>
             <th>Usuario Creador</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +31,10 @@
             <td>{{ tarea.prioridad }}</td>
             <td>{{ tarea.usuario_asignado }}</td>
             <td>{{ tarea.usuario_creador }}</td>
+            <td>
+                <button (click)="eliminarTarea(tarea.tareaId)">Eliminar</button>
+                <button *ngIf="tarea.estado === 'PENDIENTE'" (click)="completarTarea(tarea.tareaId)">Completar</button>
+            </td>
         </tr>
     </tbody>
 </table>

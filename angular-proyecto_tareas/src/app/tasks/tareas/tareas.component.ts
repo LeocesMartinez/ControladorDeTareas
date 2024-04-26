@@ -8,7 +8,8 @@ import { Component } from '@angular/core';
 })
 export class TareasComponent {
 
+  /*
   cerrarSesion() {
     localStorage.removeItem('usuario');
-  }  
+  }  */
 }

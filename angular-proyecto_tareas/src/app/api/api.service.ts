@@ -53,7 +53,7 @@ export class ApiService {
   }
 
   // Método para actualizar un elemento existente
-  update<T>(resource: string, id: any, item: any): Observable<T> {
+  update<T>(resource: string, item: any): Observable<T> {
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     
     const body = new URLSearchParams();
@@ -62,15 +62,24 @@ export class ApiService {
         body.set(key, item[key]);
       }
     }
-    return this.http.put<T>(`${this.apiUrl}/${resource}/${id}`, body.toString(), {headers: headers})
+    return this.http.put<T>(`${this.apiUrl}/${resource}`, body.toString(), {headers: headers})
       .pipe(
         catchError(this.handleError)
       );
   }
 
   // Método para eliminar un elemento
-  delete<T>(resource: string, id: any): Observable<T> {
-    return this.http.delete<T>(`${this.apiUrl}/${resource}/${id}`)
+  delete<T>(resource: string, item: any): Observable<T> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    
+    const body = new URLSearchParams();
+    for (const key in item) {
+      if (item.hasOwnProperty(key)) {
+        body.set(key, item[key]);
+      }
+    }
+
+    return this.http.delete<T>(`${this.apiUrl}/${resource}`, {headers: headers, body: body.toString()})
       .pipe(
         catchError(this.handleError)
       );

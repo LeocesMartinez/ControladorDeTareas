@@ -1,5 +1,5 @@
-
+<div *ngIf="usuario" class="corner-text">
+    <div>Hola, {{usuario}}</div>
+    <button (click)="cerrarSesion()" class="btn">Cerrar Sesión</button>
+</div>
 <router-outlet />
-
-
-

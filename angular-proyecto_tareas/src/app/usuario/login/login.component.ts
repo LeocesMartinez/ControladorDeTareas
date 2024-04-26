@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           console.log('Datos exitosos:', datos);
           localStorage.setItem('usuario', login.username);
           this.router.navigate(['/tareas']);
+          //this.reloadPage();
 
         },
         error: (error) => {
@@ -68,5 +69,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.mensajeError = "Debe llenar todos los campos del formulario";
       console.log('El formulario no es válido');
     }
+  }
+
+  reloadPage() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([this.router.url]);
+    });
   }
 }

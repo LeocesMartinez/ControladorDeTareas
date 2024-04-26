@@ -57,6 +57,63 @@ export class MostarTareasComponent implements OnInit, OnDestroy {
     });
 
   }
+
+  eliminarTarea(tareaId: string) {
+    if (this.suscripcionServicio) {
+      this.suscripcionServicio.unsubscribe();
+    }
+
+    const paramsTareas = {
+      tareaId: tareaId
+    };
+
+    this.suscripcionServicio = this.apiService.delete('eliminar-tarea', paramsTareas)
+    .subscribe({
+      next: (datos) => {
+        // Manejar datos exitosos aquí
+        this.mensajeError = "";
+        console.log('Datos exitosos:', datos);
+        this.verTareas();
+      },
+      error: (error) => {
+        // Manejar errores aquí
+        this.mensajeError = "Ha ocurrido un error al eliminar la tarea";
+        console.error('Error al obtener datos:', error);
+      },
+      complete: () => {
+        // Manejar la finalización aquí si es necesario
+      }
+    });
+  }
+
+  completarTarea(tareaId: string) {
+    if (this.suscripcionServicio) {
+      this.suscripcionServicio.unsubscribe();
+    }
+
+    const paramsTareas = {
+      tareaId: tareaId,
+      usuarioModificador: localStorage.getItem('usuario')
+    };
+
+    this.suscripcionServicio = this.apiService.update('marcarTareaCompletada', paramsTareas)
+    .subscribe({
+      next: (datos) => {
+        // Manejar datos exitosos aquí
+        this.mensajeError = "";
+        console.log('Datos exitosos:', datos);
+        this.verTareas();
+      },
+      error: (error) => {
+        // Manejar errores aquí
+        this.mensajeError = "Ha ocurrido un error al actualizar la tarea";
+        console.error('Error al obtener datos:', error);
+      },
+      complete: () => {
+        // Manejar la finalización aquí si es necesario
+      }
+    });
+  }
   
   ngOnDestroy(): void {
     if (this.suscripcionServicio) {
